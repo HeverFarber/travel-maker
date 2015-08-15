@@ -1,0 +1,63 @@
+<!doctype html>
+<html ng-app="travel">
+
+<head>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/index.css">
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/node_modules/angular/angular.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxV8fSKU8NC9M5UU6bGqCijhE02tA5Tk8&libraries=places&callback=initMap">
+    </script>
+    <script src="/index.js"></script>
+</head>
+
+<body ng-controller="TravelController">
+    <div style="width:100vw; height:100vh;">
+        <div class="map border col" id="map"></div>
+        <div class="control col">
+            <div class="max-hei col border container-fluid" style="width:50%">
+                <div class="row pad header-box">
+                    <div style="width:20%;" class="col max-hei text-center"><span ng-click="showSearch()" ng-if="!search" class="on-active glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+                    <div style="width:80%;" class="col max-hei text-right">
+                        אתרים
+                    </div>
+                </div>
+                <div class="row text-right box-item on-active" ng-repeat="site in sites">
+                    <div class="col-md-2"><span class="on-active glyphicon glyphicon-trash" aria-hidden="true"></span></div>
+                    <div class="col-md-7 max-hei">
+                        <div ng-show='site.editname'>
+                            <input autofocus type="text" class="input-attr" ng-blur='site.editname = false;' ng-model="site.name" />
+                        </div>
+                        <div ng-click='site.editname = true;' ng-show='!site.editname'>{{site.name}}</div>
+                    </div>
+                    <div class="col-md-3 max-hei">
+                        <div ng-show='site.edittime'>
+                            <input autofocus type="text" class="input-attr" ng-blur='site.edittime = false;' ng-model="site.time" />
+                        </div>
+                        <div ng-click='site.edittime = true;' ng-show='!site.edittime'>{{site.time}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="max-hei col border container-fluid" style="width:50%">
+                <div class="row pad header-box">
+                    <div style="width:20%;" class="col max-hei text-center"><span ng-click="addTrack()" class="on-active glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+                    <div style="width:80%;" class="col max-hei text-right">
+                        המסלולים שלי
+                    </div>
+                </div>
+                <div class="row text-right box-item on-active" ng-click='active.trackid = track.id' ng-class='{"active":false   }' ng-repeat="track in tracks">
+                    <div class="col-md-2"><span class="on-active glyphicon glyphicon-trash" aria-hidden="true"></span></div>
+                    <div class="col-md-10 max-hei">
+                        <div ng-show='track.editname'>
+                            <input autofocus type="text" class="input-attr" ng-blur='track.editname = false;' ng-model="track.title" />
+                        </div>
+                        <div ng-click='track.editname = true;' ng-show='!track.editname'>{{track.title}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

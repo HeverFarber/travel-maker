@@ -1,0 +1,79 @@
+.map {
+    width: 60%;
+    height: 100%;
+}
+
+.control {
+    width: 40%;
+    height: 100%;
+}
+
+.col {
+    float: left;
+}
+
+.max-hei {
+    height: 100%;
+}
+
+.max-wid {
+    width: 100%;
+}
+
+.nopad {
+    padding: 0;
+}
+
+.pad {
+    padding: 3px;
+}
+
+.border {
+    border: 3px solid #948888;
+}
+
+.header-box {
+    height: 35px;
+    background: #E6E6E6;
+    box-shadow: 0px 0px 2px 2px #B7B4B4;
+    line-height: 28px;
+    font-size: 21px;
+}
+
+.on-active:hover {
+    background: rgba(229, 231, 232, 0.52);
+    box-shadow: 0px 0px 2px 2px #A28E8E;
+    cursor: pointer;
+}
+
+.active {
+    background: rgba(229, 231, 232, 0.52);
+    box-shadow: 0px 0px 2px 2px #A28E8E;
+    cursor: pointer;
+}
+
+.box-item {
+    height: 35px;
+    border: 1px solid #AFAFAF;
+    line-height: 35px;
+    box-shadow: 0px 1px 1px 0px #B7B7B7;
+    direction: rtl;
+}
+
+.input-attr {
+    width: 100%;
+    height: 30px;
+    margin: 2px;
+    line-height: normal;
+    text-align: right;
+}
+
+.search-box {
+    position: absolute;
+    z-index: 2;
+    right: 14px;
+    top: 31px;
+    text-align: right;
+    font-size: 17px;
+    direction: rtl;
+}
