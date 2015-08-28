@@ -77,3 +77,9 @@
     font-size: 17px;
     direction: rtl;
 }
+.text-overflow {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
