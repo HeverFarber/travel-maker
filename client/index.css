@@ -83,3 +83,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.active-choose{
+    background-color: #DEDEDE;
+}

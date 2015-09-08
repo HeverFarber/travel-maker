@@ -1,0 +1,76 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'mongose',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 warn package.json travel-maker@1.0.0 No description
+6 warn package.json travel-maker@1.0.0 No repository field.
+7 warn package.json travel-maker@1.0.0 No README data
+8 verbose readDependencies using package.json deps
+9 verbose cache add [ 'mongose', null ]
+10 verbose cache add name=undefined spec="mongose" args=["mongose",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: 'mongose',
+11 verbose parsed url   path: 'mongose',
+11 verbose parsed url   href: 'mongose' }
+12 silly lockFile a9d45aa8-mongose mongose
+13 verbose lock mongose C:\Users\Hever\AppData\Roaming\npm-cache\a9d45aa8-mongose.lock
+14 silly lockFile a9d45aa8-mongose mongose
+15 silly lockFile a9d45aa8-mongose mongose
+16 verbose addNamed [ 'mongose', '' ]
+17 verbose addNamed [ null, '*' ]
+18 silly lockFile 32b277af-mongose mongose@
+19 verbose lock mongose@ C:\Users\Hever\AppData\Roaming\npm-cache\32b277af-mongose.lock
+20 silly addNameRange { name: 'mongose', range: '*', hasData: false }
+21 verbose request where is /mongose
+22 verbose request registry https://registry.npmjs.org/
+23 verbose request id 584e5bdd24274a58
+24 verbose url raw /mongose
+25 verbose url resolving [ 'https://registry.npmjs.org/', './mongose' ]
+26 verbose url resolved https://registry.npmjs.org/mongose
+27 verbose request where is https://registry.npmjs.org/mongose
+28 info trying registry request attempt 1 at 12:51:54
+29 http GET https://registry.npmjs.org/mongose
+30 http 404 https://registry.npmjs.org/mongose
+31 silly registry.get cb [ 404,
+31 silly registry.get   { 'content-type': 'application/json',
+31 silly registry.get     'cache-control': 'max-age=0',
+31 silly registry.get     'content-length': '2',
+31 silly registry.get     'accept-ranges': 'bytes',
+31 silly registry.get     date: 'Fri, 04 Sep 2015 09:51:58 GMT',
+31 silly registry.get     via: '1.1 varnish',
+31 silly registry.get     age: '0',
+31 silly registry.get     connection: 'keep-alive',
+31 silly registry.get     'x-served-by': 'cache-lhr6326-LHR',
+31 silly registry.get     'x-cache': 'MISS',
+31 silly registry.get     'x-cache-hits': '0',
+31 silly registry.get     'x-timer': 'S1441360318.671243,VS0,VE92' } ]
+32 silly lockFile 32b277af-mongose mongose@
+33 silly lockFile 32b277af-mongose mongose@
+34 error 404 Not Found
+34 error 404
+34 error 404 'mongose' is not in the npm registry.
+34 error 404 You should bug the author to publish it
+34 error 404 It was specified as a dependency of 'travel-maker'
+34 error 404
+34 error 404 Note that you can also install from a
+34 error 404 tarball, folder, or http url, or git url.
+35 error System Windows_NT 6.1.7601
+36 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "mongose" "--save"
+37 error cwd C:\Users\Hever\Projects\travel-maker
+38 error node -v v0.10.33
+39 error npm -v 1.4.28
+40 error code E404
+41 verbose exit [ 1, true ]

@@ -1,26 +1,52 @@
 var app = angular.module('travel', []);
 
-app.controller('TravelController', ['$scope', '$compile', function ($scope, $compile) {
+app.controller('TravelController', ['$scope', '$compile','$http', function ($scope, $compile, $http) {
 
-    $scope.tracks = [{
+    /*$scope.tracks = [{
         title: 'טיול משפחה - יום א'
     }, {
         title: 'טיול משפחה - יום ב'
-    }];
+    }];*/
     $scope.sites = JSON.parse('[{"location":{"G":31.768,"K":35.213},"name":"Jerusalem, Israel"},{"location":{"G":32.085,"K":34.781},"name":"Tel Aviv-Yafo, Israel"},{"location":{"G":32.084,"K":34.887},"name":"Petah Tikva, Israel"}]');
 
     $scope.removeItem = function (arr, index) {
         arr.splice(index, 1);
+        
+        $scope.putTrack();
     };
 
     $scope.addTrack = function () {
         $scope.tracks.push({
             title: "מסלול חדש - הקלק לשנות"
         });
+
+        $scope.putTrack();
+    };
+    
+    $scope.setSites = function(track){
+        $scope.currentTrack = track;
+    }; 
+
+    $scope.loadTrack = function () {
+        $.get('/track', function (data) {
+            $scope.tracks = data;
+            $scope.setSites($scope.tracks[0]);
+            $scope.$apply();
+        });
+    };
+
+    $scope.putTrack = function () {
+        $http.post('/track', {
+            tracks: $scope.tracks
+        }, function (msg) {
+            //console.log(msg);
+        });
     };
 
     $scope.addSite = function (place) {
-        $scope.sites.push(place);
+        $scope.currentTrack.sites.push(place);
+        
+        $scope.putTrack();
     };
 
     $scope.drawPlanning = function () {
@@ -37,7 +63,7 @@ app.controller('TravelController', ['$scope', '$compile', function ($scope, $com
         $scope.route = [];
         var waypoints = [];
 
-        $scope.sites.forEach(function (site) {
+        $scope.currentTrack.sites.forEach(function (site) {
             var point = {};
 
             point.infowindow = new google.maps.InfoWindow();
@@ -61,30 +87,30 @@ app.controller('TravelController', ['$scope', '$compile', function ($scope, $com
             point.infowindow.setContent(content);
             point.infowindow.open($scope.map, point.marker);
 
-            if (index - 1 > 0 && index - 1 < $scope.sites.length - 1)
+            if (index - 1 > 0 && index - 1 < $scope.currentTrack.sites.length - 1)
                 waypoints.push({
                     location: {
                         lat: site.location.G,
                         lng: site.location.K
                     },
-                    stopover:true
+                    stopover: true
                 });
 
 
             $scope.route.push(point);
             index++;
         });
-        
+
         $scope.directionsDisplay.setMap($scope.map);
 
         $scope.directionsService.route({
             origin: {
-                lat: $scope.sites[0].location.G,
-                lng: $scope.sites[0].location.K
+                lat: $scope.currentTrack.sites[0].location.G,
+                lng: $scope.currentTrack.sites[0].location.K
             },
             destination: {
-                lat: $scope.sites[$scope.sites.length-1].location.G,
-                lng: $scope.sites[$scope.sites.length-1].location.K
+                lat: $scope.currentTrack.sites[$scope.currentTrack.sites.length - 1].location.G,
+                lng: $scope.currentTrack.sites[$scope.currentTrack.sites.length - 1].location.K
             },
             waypoints: waypoints,
             travelMode: google.maps.TravelMode["DRIVING"]
@@ -100,7 +126,7 @@ app.controller('TravelController', ['$scope', '$compile', function ($scope, $com
             point.infowindow.close();
             point.marker.setMap(null);
         });
-        
+
         $scope.directionsDisplay.setMap(null);
 
         $scope.route = undefined;
@@ -199,6 +225,8 @@ app.controller('TravelController', ['$scope', '$compile', function ($scope, $com
     };
 
     document.addEventListener("mapLoaded", $scope.initMap);
+
+    $scope.loadTrack();
 }]);
 
 function initMap() {

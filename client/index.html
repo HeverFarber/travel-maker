@@ -23,17 +23,17 @@
                         אתרים
                     </div>
                 </div>
-                <div class="row text-right box-item on-active" ng-repeat="site in sites" title="{{site.name}}">
+                <div class="row text-right box-item on-active" ng-repeat="site in currentTrack.sites" title="{{site.name}}">
                     <div class="col-md-2"><span class="on-active glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeItem(sites, $index)"></span></div>
                     <div class="col-md-7 max-hei">
                         <div ng-show='site.editname'>
-                            <input autofocus type="text" class="input-attr" ng-blur='site.editname = false;' ng-model="site.name" />
+                            <input autofocus type="text" class="input-attr" ng-blur='site.editname = false;putTrack()' ng-model="site.name" />
                         </div>
                         <div ng-click='site.editname = true;' class="text-overflow" ng-show='!site.editname'>{{site.name}}</div>
                     </div>
                     <div class="col-md-3 max-hei">
                         <div ng-show='site.edittime'>
-                            <input autofocus type="text" class="input-attr" ng-blur='site.edittime = false;' ng-model="site.time" />
+                            <input autofocus type="text" class="input-attr" ng-blur='site.edittime = false;putTrack()' ng-model="site.time" />
                         </div>
                         <div ng-click='site.edittime = true;' ng-show='!site.edittime'>{{site.time}}</div>
                     </div>
@@ -46,13 +46,14 @@
                         המסלולים שלי
                     </div>
                 </div>
-                <div class="row text-right box-item on-active" ng-click='active.trackid = track.id' ng-class='{"active":false   }' ng-repeat="track in tracks">
+                <div class="row text-right box-item on-active" ng-click='active.trackid = track.id' ng-class="{'active':currentTrack._id==track._id}" ng-repeat="track in tracks">
                     <div class="col-md-2"><span class="on-active glyphicon glyphicon-trash" ng-click="removeItem(tracks, $index)" aria-hidden="true"></span></div>
-                    <div class="col-md-10 max-hei">
+                    <div class="col-md-2"><span class="on-active glyphicon glyphicon-edit" ng-click='track.editname = true;' aria-hidden="true"></span></div>
+                    <div class="col-md-8 max-hei">
                         <div ng-show='track.editname'>
-                            <input autofocus type="text" class="input-attr" ng-blur='track.editname = false;' ng-model="track.title" />
+                            <input autofocus type="text" class="input-attr" ng-blur='track.editname = false;putTrack()' ng-model="track.title" />
                         </div>
-                        <div ng-click='track.editname = true;' ng-show='!track.editname'>{{track.title}}</div>
+                        <div ng-show='!track.editname' ng-click="setSites(track)">{{track.title}}</div>
                     </div>
                 </div>
             </div>
