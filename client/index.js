@@ -7,7 +7,7 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
     }, {
         title: 'טיול משפחה - יום ב'
     }];*/
-    $scope.sites = JSON.parse('[{"location":{"G":31.768,"K":35.213},"name":"Jerusalem, Israel"},{"location":{"G":32.085,"K":34.781},"name":"Tel Aviv-Yafo, Israel"},{"location":{"G":32.084,"K":34.887},"name":"Petah Tikva, Israel"}]');
+    //$scope.sites = JSON.parse('[{"location":{"G":31.768,"K":35.213},"name":"Jerusalem, Israel"},{"location":{"G":32.085,"K":34.781},"name":"Tel Aviv-Yafo, Israel"},{"location":{"G":32.084,"K":34.887},"name":"Petah Tikva, Israel"}]');
 
     $scope.removeItem = function (arr, index) {
         arr.splice(index, 1);
@@ -17,7 +17,8 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
 
     $scope.addTrack = function () {
         $scope.tracks.push({
-            title: "מסלול חדש - הקלק לשנות"
+            title: "מסלול חדש - הקלק לשנות",
+            sites:[]
         });
 
         $scope.putTrack();
@@ -38,7 +39,7 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
     $scope.putTrack = function () {
         $http.post('/track', {
             tracks: $scope.tracks
-        }, function (msg) {
+        }).then(function (msg) {
             //console.log(msg);
         });
     };
@@ -47,6 +48,22 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
         $scope.currentTrack.sites.push(place);
         
         $scope.putTrack();
+    };
+    
+    $scope.tsp = function(){
+        $http.post('/tsp', {
+            locations: $scope.currentTrack.sites
+        }).then(function (order) {
+            var newOrder = [];
+            
+            order.data.forEach(function (node){
+                newOrder.push($scope.currentTrack.sites[node]);
+            });
+            
+            $scope.currentTrack.sites = newOrder;
+            
+            $scope.putTrack();
+        });
     };
 
     $scope.drawPlanning = function () {
@@ -79,13 +96,13 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
                 anchor: new google.maps.Point(17, 34),
                 scaledSize: new google.maps.Size(35, 35)
             }));
-            point.marker.setPosition(site.location);
-            point.marker.setVisible(true);
+            //point.marker.setPosition(site.location);
+            //point.marker.setVisible(true);
 
             var content = '<div class="text-center"><strong>' + index + " " + site.name + '</strong>';
 
-            point.infowindow.setContent(content);
-            point.infowindow.open($scope.map, point.marker);
+            //point.infowindow.setContent(content);
+            //point.infowindow.open($scope.map, point.marker);
 
             if (index - 1 > 0 && index - 1 < $scope.currentTrack.sites.length - 1)
                 waypoints.push({
