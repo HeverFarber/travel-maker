@@ -54,7 +54,7 @@ app.post('/tsp', function (req, res) {
     var locations = [];
     
     req.body.locations.forEach(function (item){
-        locations.push({location:item.location.G + "," + item.location.K});
+        locations.push({location:(item.location.G || item.location.J) + "," + (item.location.K || item.location.M)});
     });
     
     TSP(locations, function (err, result) {
@@ -151,7 +151,7 @@ function TSP(sites, cb) {
         },
         function (Graph, callback) {
             // run deep search
-            var random = Math.floor(Math.random() * Object.keys(Graph).length);
+            var random = 0;//Math.floor(Math.random() * Object.keys(Graph).length);
 
             callback(null, DFS(Graph, random));
         },

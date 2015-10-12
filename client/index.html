@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="row text-right box-item on-active" ng-repeat="site in currentTrack.sites" title="{{site.name}}">
-                    <div class="col-md-2"><span class="on-active glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeItem(sites, $index)"></span></div>
+                    <div class="col-md-2"><span class="on-active glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeItem(currentTrack.sites, $index)"></span></div>
                     <div class="col-md-7 max-hei">
                         <div ng-show='site.editname'>
                             <input autofocus type="text" class="input-attr" ng-blur='site.editname = false;putTrack()' ng-model="site.name" />
@@ -36,7 +36,7 @@
                         <div ng-show='site.edittime'>
                             <input autofocus type="text" class="input-attr" ng-blur='site.edittime = false;putTrack()' ng-model="site.time" />
                         </div>
-                        <div ng-click='site.edittime = true;' ng-show='!site.edittime'>{{site.time}}</div>
+                        <div class="max-hei max-wid" ng-click='site.edittime = true;' ng-show='!site.edittime'>{{site.time}}</div>
                     </div>
                 </div>
             </div>

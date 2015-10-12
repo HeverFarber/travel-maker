@@ -45,6 +45,7 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
     };
 
     $scope.addSite = function (place) {
+        place.time = "00:00";
         $scope.currentTrack.sites.push(place);
         
         $scope.putTrack();
@@ -107,8 +108,8 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
             if (index - 1 > 0 && index - 1 < $scope.currentTrack.sites.length - 1)
                 waypoints.push({
                     location: {
-                        lat: site.location.G,
-                        lng: site.location.K
+                        lat: site.location.G || site.location.J,
+                        lng: site.location.K || site.location.M
                     },
                     stopover: true
                 });
@@ -122,12 +123,12 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
 
         $scope.directionsService.route({
             origin: {
-                lat: $scope.currentTrack.sites[0].location.G,
-                lng: $scope.currentTrack.sites[0].location.K
+                lat: $scope.currentTrack.sites[0].location.G || $scope.currentTrack.sites[0].location.J,
+                lng: $scope.currentTrack.sites[0].location.K || $scope.currentTrack.sites[0].location.M
             },
             destination: {
-                lat: $scope.currentTrack.sites[$scope.currentTrack.sites.length - 1].location.G,
-                lng: $scope.currentTrack.sites[$scope.currentTrack.sites.length - 1].location.K
+                lat: $scope.currentTrack.sites[$scope.currentTrack.sites.length - 1].location.G || $scope.currentTrack.sites[$scope.currentTrack.sites.length - 1].location.J,
+                lng: $scope.currentTrack.sites[$scope.currentTrack.sites.length - 1].location.K || $scope.currentTrack.sites[$scope.currentTrack.sites.length - 1].location.M
             },
             waypoints: waypoints,
             travelMode: google.maps.TravelMode["DRIVING"]
@@ -241,7 +242,9 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
         setTimeout($scope.showSearch, 1000);
     };
 
-    document.addEventListener("mapLoaded", $scope.initMap);
+    document.addEventListener("mapLoaded", function (){
+        window.onload = $scope.initMap;
+    });
 
     $scope.loadTrack();
 }]);
