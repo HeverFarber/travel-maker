@@ -46,6 +46,7 @@ app.controller('TravelController', ['$scope', '$compile','$http', function ($sco
 
     $scope.addSite = function (place) {
         place.time = "00:00";
+        place.location = {G:place.location.lat(),K:place.location.lng()};
         $scope.currentTrack.sites.push(place);
         
         $scope.putTrack();
